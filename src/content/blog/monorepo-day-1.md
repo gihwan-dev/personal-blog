@@ -1,13 +1,13 @@
 ---
-author: 최기환
+author: Gihwan-dev
 pubDatetime: 2024-05-13T18:00:00Z
-title: 모노레포 개발지 - 1일차
+title: monorepo
 slug: mono-repo-travel-day-1
 featured: false
 draft: false
 tags:
   - daily
-description: 개인적으로 사용할 모노레포 개발을 시작하며 만난 깨달음, 문제점, 해결법 등을 정리했습니다.
+description: I'm make my own monorepo with turborepo and pnpm. This post about my travel for build own monorepo
 ---
 
 ## Table of contents
