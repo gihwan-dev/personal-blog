@@ -1,6 +1,6 @@
 ---
 author: Gihwan-dev
-pubDatetime: 2024-05-13T18:00:00Z
+pubDatetime: 2024-05-13T12:29:27.802Z
 title: 나만의 모노레포 만들기 - 1
 slug: mono-repo-travel-day-one
 featured: true
