@@ -3,12 +3,10 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-AstroPaper is a minimal, responsive and SEO-friendly Astro blog theme. I designed and crafted this based on [my personal blog](https://satnaing.dev/blog).
+이 웹 사이트는 `Astro` 프레임워크로 미리 개발된 템플릿을 통해 운영되고 있습니다.
+개발자 분에 대한 정보는 [여기](https://satnaing.dev/blog)서 확인하실 수 있습니다..
 
-This theme is aimed to be accessible out of the box. Light and dark mode are supported by
-default and additional color schemes can also be configured.
-
-This theme is self-documented \_ which means articles/posts in this theme can also be considered as documentations. So, see the documentation for more info.
+개발해주신 개발자님께 감사드리며 잘 사용하도록 하겠습니다!
 
 <div>
   <img src="/assets/dev.svg" class="sm:w-1/2 mx-auto" alt="coding dev illustration">
@@ -16,21 +14,10 @@ This theme is self-documented \_ which means articles/posts in this theme can al
 
 ## Tech Stack
 
-This theme is written in vanilla JavaScript (+ TypeScript for type checking) and a little bit of ReactJS for some interactions. TailwindCSS is used for styling; and Markdown is used for blog contents.
+저는 다음 기술에 자신 있습니다:
 
-## Features
-
-Here are certain features of this site.
-
-- fully responsive and accessible
-- SEO-friendly
-- light & dark mode
-- fuzzy search
-- super fast performance
-- draft posts
-- pagination
-- sitemap & rss feed
-- highly customizable
-
-If you like this theme, you can star/contribute to the [repo](https://github.com/satnaing/astro-paper).  
-Or you can even give any feedback via my [email](mailto:contact@satnaing.dev).
+- Next.js
+- React.js
+- TailwindCSS
+- React Query
+- Zustand
