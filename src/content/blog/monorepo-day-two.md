@@ -1,6 +1,6 @@
 ---
 author: Gihwan
-pubDatetime: 2024-05-13T15:22:00Z
+pubDatetime: 2023-05-13T15:22:00Z
 title: Adding new posts in AstroPaper theme two
 slug: adding-new-posts-in-astropaper-theme two
 featured: true
