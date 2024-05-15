@@ -6,7 +6,9 @@ slug: graphql-relay
 featured: true
 draft: false
 tags:
-  - daily
+  - development
+  - graphql
+  - relay
 description: 이번 개인 프로젝트에 `GraphQL`과 `Relay`를 적용하기 위해 개념을 공부했던 내용을 정리했습니다.
 ---
 
