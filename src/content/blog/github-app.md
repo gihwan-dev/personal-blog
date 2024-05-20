@@ -14,6 +14,8 @@ description: 이번 개인 프로젝트에 `GraphQL`과 `Relay`를 적용하기 
 
 깃허브에서 인증을 하는 방식은 `Github App` 과 `Github OAuth` 가 있다. 이 포스팅에서는 특히 `Github App`에 대해서 알아보도록 하겠다.
 
+## Table of contents
+
 ## Github App
 
 `Github App`은 `Github`의 기능과 상호 작용하고 확장하기 위해 사용할 수 있다. `Github App`의 일반적인 사용 사례는 다음과 같다.
@@ -64,3 +66,7 @@ description: 이번 개인 프로젝트에 `GraphQL`과 `Relay`를 적용하기 
 `https://github.com/login/oauth/authorize`
 
 `client_id` 파라미터는 필수 파라미터다. 이외의 파라미터는 위 링크에서 확인할 수 있다.
+
+이후 콜백 URL로 `code`라는 서치 파라미터와 함께 이동된다.
+
+이 `code`값과 `clientId`, `clientSecret` 값을 사용해서 `access_token`을 발급받을 수 있다.
