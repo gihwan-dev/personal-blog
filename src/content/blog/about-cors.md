@@ -65,7 +65,7 @@ CORS는 동일 출처 정책의 제한을 완화하여, 한 출처에서 실행 
 3. 전달할 때 CORS 설정을 헤더에 추가하여 보낸다.
 4. 응답을 받아 반환한다.
 
-#### CORS 설정은 Next Config 설정을 통해 간편하게 할 수 있다.
+#### CORS 설정은 Next Config 설정을 통해 간편하게 할 수 있다
 
 ```ts
 /** @type {import('next').NextConfig} */
@@ -95,7 +95,7 @@ module.exports = {
 };
 ```
 
-#### 서버에서 요청을 받아 Github OAuth로 전달한다.
+#### 서버에서 요청을 받아 Github OAuth로 전달한다
 
 ```ts
 export const githubOAuthHandler = async ({
@@ -132,7 +132,7 @@ export const githubOAuthHandler = async ({
 
 ### 만난 문제
 
-### 1. 깃허브 응답 형식은 JSON 형식이 아니다.
+### 1. 깃허브 응답 형식은 JSON 형식이 아니다
 
 - Github OAuth 엔드포인트는 `application/x-www-form-urlencoded` 형식으로 응답을 반환한다.
 - 그렇기에 응답을 텍스트로 읽고 URLSearchParams로 파싱하여 필요한 값을 추출해야 한다.
