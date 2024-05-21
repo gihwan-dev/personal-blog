@@ -1,14 +1,14 @@
 ---
 author: Gihwan-dev
 pubDatetime: 2024-05-21T09:11:54.130Z
-title: [개발 일지] 로딩, 에러 바운더리와 useSearchParams
-slug: error-resolve-05-21
+title: 로딩, 에러 바운더리와 useSearchParams
+slug: error-resolve
 featured: true
 draft: false
 tags:
   - development
-  - cors
-  - http
+  - error
+  - daily
 description: 이번 앱을 개발하며 에러 바운더리와 서스펜스 바운더리에 대해 깊게 고민하며 설정을 했습니다! 그러던 중 만난 문제점들에 대해서 적어 보았습니다
 ---
 
