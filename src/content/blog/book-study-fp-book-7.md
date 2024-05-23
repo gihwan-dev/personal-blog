@@ -1,7 +1,7 @@
 ---
 author: Gihwan-dev
 pubDatetime: 2024-05-23T13:37:01.293Z
-title: [bookSailor] 귀에 쏙쏙 들어오는 함수형 프로그래밍 Chapter7
+title: bookSailor | 귀에 쏙쏙 들어오는 함수형 프로그래밍 Chapter7
 slug: bookSailor-fp-chapter7
 featured: false
 draft: false
