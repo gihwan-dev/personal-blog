@@ -200,4 +200,4 @@ Array.prototype.groupBy = function (fn) {
 
 [개발자 가상 면접 3/6 - 명령형으로 동시성을 다루다 서버도 터지고 눈물샘도 터지는.. (수요코딩회 ep.1)](https://www.youtube.com/watch?v=4VPeriS5XWo&list=PLIa4-DYeLtn1I7pQEMbYITbl8SYm2AqXX&index=3)
 
-> 방송해 주셔서 감사합니다! 열심히 배우겠습니다!
+> 방송 해주셔서 감사합니다! 열심히 배우겠습니다!
