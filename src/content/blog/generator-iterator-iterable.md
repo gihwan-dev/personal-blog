@@ -63,7 +63,7 @@ generator().next(); // "", return { value: undefined, done: true }
 
 ## 이터레이터를 활용해 문제 풀기
 
-이터레이터를 활용해 `LeetCode` 문제를 풀어 보았다. 앞으로는 `for`문을 이용한 순회가 아닌 `iterator`를 활용한 순회를 통해 문제를 푸는걸 습관하 하려고 한다.
+이터레이터를 활용해 `LeetCode` 문제를 풀어 보았다. 앞으로는 `for`문을 이용한 순회가 아닌 `iterator`를 활용한 순회를 통해 문제를 푸는걸 습관화 하려고 한다.
 
 ### Chunk Array
 
@@ -83,7 +83,7 @@ function* take(length, iterable) {
 }
 ```
 
-우선 위 코드는 `arr`과 `length`를 입력받아 `length` 길이 만큼의 값을 반환하는 제네레이터 함수다. 다만 `done`이 `true`인 경우 `break`를 해서 입력으로 배열을 통해 생성한 이터레이터의 순회가 끝난 경우엔 더이상 `while`문을 돌지 않도록 한다.
+우선 위 코드는 `arr`과 `length`를 입력받아 `length` 길이 만큼의 값을 반환하는 제네레이터 함수다. 다만 `done`이 `true`인 경우 `break`를 해서 입력된 배열을 통해 생성한 이터레이터의 순회가 끝난 경우엔 더이상 `while`문을 돌지 않도록 한다.
 
 ```js
 function* getChunkedArray(size, iterable) {
@@ -105,7 +105,7 @@ function* getChunkedArray(size, iterable) {
 }
 ```
 
-위 함수는 `size`와 `iterable`을 인자로 받아 `size`만큼 길이로 분리된 배열을 반환하는 제네레이터 함수다. `take`함수를 통해 부분 배열을 반환받고 `arr.length`가 `true`값을 가진다면 `arr`을 반환해준다.
+위 함수는 `size`와 `iterable`을 인자로 받아 `size`만큼 길이로 분리된 배열을 반환하는 제네레이터 함수다. `take`함수를 통해 부분 배열을 반환받고 `arr.length`가 `true`값을 가진다면 `arr`을 `yield` 해준다.
 
 ```js
 /**
@@ -118,7 +118,7 @@ var chunk = function (arr, size) {
 };
 ```
 
-위 함수는 단순히 `getChunkedArray`함수를 호출해서 그 값을 배열로 반환해주는 함수다. 아마 `getChunkedArray`는 제네레이터일 필요는 없다고 생각이 될 수 있는데 그렇게 할 경우 `chunked`된 배열을 담을 배열과 거기에 매번 `push`해서 반환해줘야 하기 때문에 지금이 좀 더 아름다운 코드라고 생각한다.
+위 함수는 단순히 `getChunkedArray`함수를 호출해서 반환받은 제네레이터 값을 배열로 반환해주는 함수다. 아마 `getChunkedArray`는 제네레이터일 필요는 없다고 생각이 될 수 있는데 그렇게 할 경우 `chunked`된 배열을 담을 배열과 거기에 매번 `push`해서 반환해줘야 하기 때문에 지금이 좀 더 아름다운 코드라고 생각한다.
 
 ### Group by
 
@@ -176,7 +176,7 @@ function getGroupedValue(arr, fn) {
 }
 ```
 
-위 코드는 `iterator`를 통해 순회하며 키와 값을 통해 모든 원소를 그룹화 하는 함수다.
+위 코드는 `iterator`를 통해 순회하며 키와 값을 통해 원소를 그룹화 하는 함수다.
 
 ```js
 Array.prototype.groupBy = function (fn) {
@@ -192,7 +192,7 @@ Array.prototype.groupBy = function (fn) {
 
 안전하게 코딩할 수 있는 방법이라고 생각된다. 요소의 정보에 대한 처리를 적절하게 해주면 되고 배열의 길이에 대한 정보를 또 다시 처리하지 않아도 된다는게 신기했다.
 
-`chunk`라는 함수를 구현할 때 `for`문으로 구현하게 되면 필연적으로 입력받은 배열의 길이와 `size`간의 관계에 대한 에러 처리나 연산을 해줘야 한다. 그러나 `iterator`를 사용하니 요소의 정보 `{ value, done }`, `arr.length`에 대한 처리만 해주니 간편했다.
+`chunk`라는 함수를 구현할 때 `for`문으로 구현하게 되면 필연적으로 입력받은 배열의 길이와 `size`간의 관계에 대한 에러 처리나 연산을 해줘야 한다. 그러나 `iterator`를 사용하니 요소의 정보 `{ value, done }`, `arr.length`에 대한 간단한 처리만 해주니 간편했다.
 
 앞으로도 이러한 방식으로 안전하게 코딩할 수 있도록 많이 배워야 겠다.
 
