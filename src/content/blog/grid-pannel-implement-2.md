@@ -2,7 +2,7 @@
 author: Gihwan-dev
 pubDatetime: 2024-05-26T08:01:35.146Z
 title: 위젯을 붙여넣을 그리드 패널을 구현해 보았습니다. - 2편
-slug: widget-grid-panel-implement
+slug: widget-grid-panel-implement-2
 featured: true
 draft: false
 tags:
