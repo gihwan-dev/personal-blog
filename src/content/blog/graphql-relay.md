@@ -3,7 +3,7 @@ author: Gihwan-dev
 pubDatetime: 2024-05-15T05:13:58.008Z
 title: GraphQL과 Relay
 slug: graphql-relay
-featured: true
+featured: false
 draft: false
 tags:
   - development

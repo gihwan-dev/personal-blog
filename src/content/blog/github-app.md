@@ -3,7 +3,7 @@ author: Gihwan-dev
 pubDatetime: 2024-05-15T13:45:12.615Z
 title: Github App 개발하기
 slug: github-app-1
-featured: true
+featured: false
 draft: false
 tags:
   - development
