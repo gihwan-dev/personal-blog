@@ -3,12 +3,12 @@ author: Gihwan-dev
 pubDatetime: 2024-06-02T01:52:03.135Z
 title: 사소한줄 알았던 버그의 날갯짓이 태풍이 되어 돌아왔다.
 slug: small-error-become-fatal
-featured: false
+featured: true
 draft: false
 tags:
-  - bookSailor
-  - fp
-  - study
+  - development
+  - error
+  - zustand
 description: 사소한줄 알았던 작은 버그가 치명적인 에러가 되어 발견되었습니다... 이 경험을 하며 느낀점들을 적어 봤습니다.
 ---
 
