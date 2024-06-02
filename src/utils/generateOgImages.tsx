@@ -7,20 +7,14 @@ import siteOgImage from "./og-templates/site";
 const fetchFonts = async () => {
   // Regular Font
   const fontFileRegular = await fetch(
-    "https://www.1001fonts.com/download/font/ibm-plex-mono.regular.ttf"
+    "https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff"
   );
   const fontRegular: ArrayBuffer = await fontFileRegular.arrayBuffer();
 
-  // Bold Font
-  const fontFileBold = await fetch(
-    "https://www.1001fonts.com/download/font/ibm-plex-mono.bold.ttf"
-  );
-  const fontBold: ArrayBuffer = await fontFileBold.arrayBuffer();
-
-  return { fontRegular, fontBold };
+  return { fontRegular };
 };
 
-const { fontRegular, fontBold } = await fetchFonts();
+const { fontRegular } = await fetchFonts();
 
 const options: SatoriOptions = {
   width: 1200,
@@ -28,15 +22,15 @@ const options: SatoriOptions = {
   embedFont: true,
   fonts: [
     {
-      name: "IBM Plex Mono",
+      name: "Pretendard-Regular",
       data: fontRegular,
       weight: 400,
       style: "normal",
     },
     {
-      name: "IBM Plex Mono",
-      data: fontBold,
-      weight: 600,
+      name: "Pretendard-Regular",
+      data: fontRegular,
+      weight: 900,
       style: "normal",
     },
   ],
