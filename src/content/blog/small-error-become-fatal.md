@@ -22,7 +22,7 @@ description: 사소한줄 알았던 작은 버그가 치명적인 에러가 되�
 
 다음 이미지는 관리자 페이지의 게시글 작성 화면이다.
 
-![portfolio-editor-screen](@asets/images/portfolio-editor.png)
+![portfolio-editor-screen](@assets/images/portfolio-editor.png)
 
 에러가 발생한 부분은 왼쪽의 `textarea`였다. 다음 코드를 보자.
 
