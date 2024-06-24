@@ -2,13 +2,13 @@
 author: Gihwan-dev
 pubDatetime: 2024-06-24T04:43:18.010Z
 title: ErrorBoundary 가 비동기, 이벤트 핸들러에서 에러를 잡지 못하는 이유(작성중)
-slug: deep-dive-into-pnpm
+slug: deep-dive-into-react-error-boundary
 featured: true
 draft: false
 tags:
   - study
   - deep-dive
-  - pnpm
+  - react
 description: 에러바운더리가 비동기, 이벤트 핸들러에서 에러를 잡지 못하는 이유에 대해 deep dive 해보았습니다.
 ---
 
@@ -138,6 +138,10 @@ class ErrorBoundary extends Components {
 - `lastContextDependency`: 현재의 컴포넌트 노드가 마지막으로 의존하고 있는 컨텍스트의 의존성에 대한 값을 저장하는 전역 변수다. 마지막으로 의존하는 값인 이유는 **효율성**을 위해서다. 리액트에서는 컴포넌트의 컨텍스트 의존성을 연결 리스트로 관리한다. 새로운 컨텍스트 의존성에 대한 추가가 간편하고 끝에서 역추적하며 의존하는 컨텍스트에 변경을 확인할 수 있다. 그렇기에 마지막으로 의존하는 값만 있으면 의존하는 모든 컨텍스트의 의존성을 확인할 수 있다.
 - `lastFullyObservedContext`: 마지막으로 완전히 관찰한 컨텍스트를 의미한다.
   여기서도 "마지막" 인 이유는 링크드 리스트 형식이기 때문이다. 역추적하며 컨텍스트의 값을 가져오기 위함이다.
+
+// TODO: resetSuspendedWorkLoopOnUnwind 에서 resetHooksOnUnwind 부분 시작
+
+// 시작 링크: https://github.com/facebook/react/blob/27e9476f0aae99adc67b10ee2b78e8ee7dc61421/packages/react-reconciler/src/ReactFiberWorkLoop.js#L1667
 
 ### handleThrow
 
