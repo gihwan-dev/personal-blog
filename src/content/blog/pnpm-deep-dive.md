@@ -1,10 +1,10 @@
 ---
 author: Gihwan-dev
 pubDatetime: 2024-06-20T08:40:34.347Z
-title: pnpm 딥 다이브
+title: pnpm 딥 다이브(작성중)
 slug: deep-dive-into-pnpm
 featured: true
-draft: true
+draft: false
 tags:
   - study
   - deep-dive
