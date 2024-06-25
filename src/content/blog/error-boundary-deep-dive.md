@@ -119,7 +119,7 @@ class ErrorBoundary extends Components {
 - `renderRootSync`: 동기적으로 렌더링을 실행하는 함수다.
 - `renderRootConcurrent`: 비 동기적으로 렌더링을 실행한다.
 
-이 두 함수 에서 살펴볼 두 가지 함수가 있다.
+이 두 함수에서 다음 두 가지 함수를 호출한다.
 
 - `handleThrow`: `try catch` 내부에서 실행된다.
 - `throwAndUnwindWorkLoop`: 루프 내에서 렌더링 과정 중에 실행된다.
@@ -128,7 +128,7 @@ class ErrorBoundary extends Components {
 
 ### throwAndUnwindWorkLoop
 
-이 함수를 먼저 살펴봐야 `handleThrow` 함수를 이해할 수 있다. 이 함수의 동작에 대해서 설명해 보겠다:
+이 함수의 동작에 대해서 설명해 보겠다:
 
 #### 1.`resetSuspendedWorkLoopOnUnwind`을 호출한다
 
@@ -139,27 +139,159 @@ class ErrorBoundary extends Components {
 - `lastFullyObservedContext`: 마지막으로 완전히 관찰한 컨텍스트를 의미한다.
   여기서도 "마지막" 인 이유는 링크드 리스트 형식이기 때문이다. 역추적하며 컨텍스트의 값을 가져오기 위함이다.
 
-// TODO: resetSuspendedWorkLoopOnUnwind 에서 resetHooksOnUnwind 부분 시작
+#### 2. throwException 함수 호출
 
-// 시작 링크: https://github.com/facebook/react/blob/27e9476f0aae99adc67b10ee2b78e8ee7dc61421/packages/react-reconciler/src/ReactFiberWorkLoop.js#L1667
-
-### handleThrow
-
-이 함수에서 하는 예외적인 에러 처리를 제외하고 보편적인 경우의 에러 처리를 살펴보자. 시그니처에서 알 수 있듯이 에러를 다루거나 `throw` 하는 함수다. 다음 코드를 보자:
+기존 컨텍스트를 모두 초기화 하고 `throwException` 함수를 호출한다. 이 함수 내부를 살펴보자.
 
 ```tsx
-const isWakeable =
-  thrownValue !== null &&
-  typeof thrownValue === "object" &&
-  typeof thrownValue.then === "function";
-
-workInProgressSuspendedReason = isWakeable
-  ? // A wakeable object was thrown by a legacy Suspense implementation.
-    // This has slightly different behavior than suspending with `use`.
-    SuspendedOnDeprecatedThrowPromise
-  : // This is a regular error. If something earlier in the component already
-    // suspended, we must clear the thenable state to unblock the work loop.
-    SuspendedOnError;
+  root: FiberRoot,
+  returnFiber: Fiber | null,
+  sourceFiber: Fiber,
+  value: mixed,
+  rootRenderLanes: Lanes,
 ```
 
-`thrownValue` 가 `Promise`를 반환하는 객체인지 확인해서
+인자로 받는 값들이다.
+
+```tsx
+const suspenseBoundary = getSuspenseHandler();
+switch (suspenseBoundary.tag) {
+  case SuspenseComponent: {
+    // If this suspense boundary is not already showing a fallback, mark
+    // the in-progress render as suspended. We try to perform this logic
+    // as soon as soon as possible during the render phase, so the work
+    // loop can know things like whether it's OK to switch to other tasks,
+    // or whether it can wait for data to resolve before continuing.
+    // TODO: Most of these checks are already performed when entering a
+    // Suspense boundary. We should track the information on the stack so
+    // we don't have to recompute it on demand. This would also allow us
+    // to unify with `use` which needs to perform this logic even sooner,
+    // before `throwException` is called.
+    if (disableLegacyMode || sourceFiber.mode & ConcurrentMode) {
+      if (getShellBoundary() === null) {
+        // Suspended in the "shell" of the app. This is an undesirable
+        // loading state. We should avoid committing this tree.
+        renderDidSuspendDelayIfPossible();
+      } else {
+        // If we suspended deeper than the shell, we don't need to delay
+        // the commmit. However, we still call renderDidSuspend if this is
+        // a new boundary, to tell the work loop that a new fallback has
+        // appeared during this render.
+        // TODO: Theoretically we should be able to delete this branch.
+        // It's currently used for two things: 1) to throttle the
+        // appearance of successive loading states, and 2) in
+        // SuspenseList, to determine whether the children include any
+        // pending fallbacks. For 1, we should apply throttling to all
+        // retries, not just ones that render an additional fallback. For
+        // 2, we should check subtreeFlags instead. Then we can delete
+        // this branch.
+        const current = suspenseBoundary.alternate;
+        if (current === null) {
+          renderDidSuspend();
+        }
+      }
+    }
+    // --생략--
+  }
+}
+```
+
+`Suspense Boundary` 를 처리하는 모습이다. 리액트에서는 `Suspense` 와 `Error` 를 함께 처리한다. `throw` 된 값이 `Promise` 인지 `Error` 인지에 따라 처리한다고 한다. 다음 코드를 보자:
+
+```tsx
+do {
+  switch (workInProgress.tag) {
+    case ClassComponent:
+      // Capture and retry
+      const ctor = workInProgress.type;
+      const instance = workInProgress.stateNode;
+      if (
+        (workInProgress.flags & DidCapture) === NoFlags &&
+        (typeof ctor.getDerivedStateFromError === "function" ||
+          (instance !== null &&
+            typeof instance.componentDidCatch === "function" &&
+            !isAlreadyFailedLegacyErrorBoundary(instance)))
+      ) {
+        workInProgress.flags |= ShouldCapture;
+        const lane = pickArbitraryLane(rootRenderLanes);
+        workInProgress.lanes = mergeLanes(workInProgress.lanes, lane);
+        // Schedule the error boundary to re-render using updated state
+
+        // --------------------- 이부분 ---------------------
+        const update = createClassErrorUpdate(lane);
+        // --------------------- 이부분 ---------------------
+        initializeClassErrorUpdate(update, root, workInProgress, errorInfo);
+        // --------------------- 이부분 ---------------------
+
+        enqueueCapturedUpdate(workInProgress, update);
+        return false;
+      }
+      break;
+    default:
+      break;
+  }
+} while (workInProgress !== null);
+```
+
+`createClassErrorUpdate, initializeClassErrorUpdate` 부분을 살펴보면 이제 에러를 처리하는 자세한 로직을 볼 수 있을 것 같다.
+
+```tsx
+function initializeClassErrorUpdate(
+  update: Update<mixed>,
+  root: FiberRoot,
+  fiber: Fiber,
+  errorInfo: CapturedValue<mixed>
+): void {
+  const getDerivedStateFromError = fiber.type.getDerivedStateFromError;
+  if (typeof getDerivedStateFromError === "function") {
+    const error = errorInfo.value;
+    update.payload = () => {
+      return getDerivedStateFromError(error);
+    };
+  }
+}
+```
+
+이외에도 `initializeClassErrorUpdate` 함수에서 다음과 같은 코드를 찾을 수 있다.
+
+```tsx
+const error = errorInfo.value;
+const stack = errorInfo.stack;
+this.componentDidCatch(error, {
+  componentStack: stack !== null ? stack : "",
+});
+```
+
+이 함수는 `captureCommitPhaseError` 함수와 `updateClassComponent` 함수에서 호출된다.
+
+`captureCommitPhaseError` 는 커밋 페이즈 `updateClassComponent` 는 렌더링 페이즈에 호출되는 함수다. 즉, 이 두 단계에서 throw 된 에러를 잡아 `ErrorComponent` 가 가진 메서드를 호출해 에러를 적절히 처리하는 거다. 커밋 페이즈와 렌더링 페이즈에서.
+
+즉, 리액트의 라이프 사이클의 주기를 돌며 그 과정에서 에러를 마킹하고 처리하기 때문에 *이벤트 루프*에서 처리되는 비동기 함수나 이벤트 핸들러의 에러는 잡아내 마킹할 수 없는거다.
+
+이벤트 핸들러나 비동기 함수의 에러를 잡아 `ErrorBoundary`에서 해결할 수 있는 방법이 없는건 아니다.
+
+```tsx
+const useErrorBoundary() {
+  const [error, setError] = useState<ErrorType extends Error | null>(null);
+
+  useEffect(() => {
+    if (error !== null) {
+      setError(() => {
+        throw error;
+      })
+    }
+  }, [error])
+
+  return setError;
+}
+
+const throwError = useErrorBoundary();
+
+throwError(new Error("비동기 함수, 이벤트 핸들러에서 던져도 ErrorBoundary에서 잡힘"));
+```
+
+이런 방식으로 `dispatch` 함수에서 에러를 `throw` 할 수 있도록 하면 리액트의 렌더링 및 커밋 과정에서 이 에러를 잡아 처리할 수 있게 된다.
+
+## 결론
+
+사실 이렇게까지 할 필요가 있었나 싶긴 하다. 다만 그래도 이 과정에서 얻은게 많다고 느껴지긴한다. 계속해서 다른 사람의 코드를 읽다보니 이제 점점 라이브러리 읽는게 익숙해지는 기분도 든다.
