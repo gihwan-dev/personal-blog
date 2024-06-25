@@ -1,7 +1,7 @@
 ---
 author: Gihwan-dev
 pubDatetime: 2024-06-20T08:40:34.347Z
-title: 왜 pnpm 빠를까?
+title: 왜 pnpm은 빠를까?
 slug: deep-dive-into-pnpm
 featured: true
 draft: false
