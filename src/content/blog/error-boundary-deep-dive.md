@@ -1,7 +1,7 @@
 ---
 author: Gihwan-dev
 pubDatetime: 2024-06-24T04:43:18.010Z
-title: ErrorBoundary 가 비동기, 이벤트 핸들러에서 에러를 잡지 못하는 이유(작성중)
+title: ErrorBoundary 가 비동기, 이벤트 핸들러에서 에러를 잡지 못하는 이유
 slug: deep-dive-into-react-error-boundary
 featured: true
 draft: false
