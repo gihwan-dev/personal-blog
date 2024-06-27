@@ -1,6 +1,6 @@
 ---
 author: Gihwan-dev
-pubDatetime: 2024-06-13T12:57:17.976Z
+pubDatetime: 2024-05-23T13:45:01.293Z
 title: bookSailor | 귀에 쏙쏙 들어오는 함수형 프로그래밍 Chapter16
 slug: bookSailor-fp-chapter16
 featured: false
