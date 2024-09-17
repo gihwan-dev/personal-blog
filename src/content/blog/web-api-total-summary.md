@@ -287,4 +287,32 @@ cookie를 비동기적으로 다룰 수 있도록 해준다.
 
 ### Document Object Model
 
-#### What?
+**DOM**은 문서의 구조를 나타내어 프로그래밍 언어 또는 스크립트와 웹 페이지를 연결시켜 준다. **DOM**은 논리적 트리를 통해 문서를 나타낸다. **DOM**의 메서드는 트리에 프로그래밍적인 방식으로 접슨할 수 있도록 해준다. 이를 사용해서 문서의 구조, 스타일, 내용을 변경할 수 있다.
+
+### Device Memory API
+
+이 기능은 HTTPS에서만 사용할 수 있다. 디바이스의 수용능력은 사용 가능한 RAM의 크기에 깊게 의존한다. 자바스크립트 API를 사용해서 이 기기의 메모리 크기를 대략정으로 얻어낼 수 있다.
+
+```js
+const RAM = navigator.deviceMemory;
+```
+
+### Device orientation events
+
+Device orientation events는 디바이스의 물리적 방향을 알아내는데 도움을 준다.
+
+### Document Picture-in-Picture API
+
+이 API는 실험적 API다. HTTPS에서만 사용 가능하다. 이 API는 사용자 지정 컨트롤이 있는 동영상이나 화상 회의 통화 참가자를 보여주는 일련의 스트리 등 임의의 HTML 콘텐츠로 채워질 수 있는 상시 상단의 창을 열 수 있다. `<video>` 태그를 사용하면 이 API가 내장되어 있다.
+
+### EditContext API
+
+이 API는 실험적 API다. 이 API는 rich text editors를 개발할 때 사용될 수 있다.
+
+### Encoding API
+
+이 API는 다양한 문자 인코딩 매커니즘을 제공한다.
+
+### Encrypted Media Extensions API
+
+이 API는 HTTPS에서만 사용할 수 있다.
