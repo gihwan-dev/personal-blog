@@ -2,7 +2,7 @@
 author: Gihwan-dev
 pubDatetime: 2024-10-04T11:00:40.050Z
 title: 리액트는 어떻게 동작할까? - chapter 1
-slug: how-can-i-use-svg-properly
+slug: how-works-react-deep-dive
 featured: true
 draft: false
 tags:
