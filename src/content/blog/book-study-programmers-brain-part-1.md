@@ -3,7 +3,7 @@ author: Gihwan-dev
 pubDatetime: 2024-09-15T05:11:59.373Z
 title: bookSailor | 프로그래머의 뇌 Part1
 slug: book-study-programmers-brain-part-1
-featured: true
+featured: false
 draft: false
 tags:
   - bookSailor
